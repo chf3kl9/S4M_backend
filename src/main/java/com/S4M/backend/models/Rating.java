@@ -1,4 +1,4 @@
-package com.S4M.backend.model;
+package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

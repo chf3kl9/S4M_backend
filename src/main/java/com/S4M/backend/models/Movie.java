@@ -1,16 +1,25 @@
-package com.S4M.backend.model;
+package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+@Getter
+@NoArgsConstructor
 public class Movie {
-    UUID id;
+
+    @Id @GeneratedValue
+    int id;
     String name;
     String description;
     String link;
 
-    public Movie(@JsonProperty("id") UUID id,
+    public Movie(@JsonProperty("id") int id,
                  @JsonProperty("name") String name,
                  @JsonProperty("description") String description,
                  @JsonProperty("link") String link) {
@@ -20,19 +29,4 @@ public class Movie {
         this.link = link;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLink() {
-        return link;
-    }
 }

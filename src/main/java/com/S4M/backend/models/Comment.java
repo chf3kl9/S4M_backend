@@ -1,6 +1,4 @@
-package com.S4M.backend.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.S4M.backend.models;
 
 import java.util.UUID;
 
