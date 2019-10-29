@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v1/movies")
+@RequestMapping("movies")
 @RestController
 public class MovieController {
 
@@ -41,7 +41,7 @@ public class MovieController {
     }
 
     @PutMapping
-    public void updateMovieById(@RequestBody Movie movie) {
+    public void updateMovie(@RequestBody Movie movie) {
         movieService.updateMovie(movie);
     }
 }
