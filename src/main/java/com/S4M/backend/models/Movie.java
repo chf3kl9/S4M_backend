@@ -15,16 +15,16 @@ public class Movie {
 
     @Id @GeneratedValue
     int id;
-    String name;
+    String title;
     String description;
     String link;
 
     public Movie(@JsonProperty("id") int id,
-                 @JsonProperty("name") String name,
+                 @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("link") String link) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.description = description;
         this.link = link;
     }
