@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @RequestMapping("movies")
 @RestController
+@CrossOrigin(origins = "http://s4m-frontend.herokuapp.com/")
 public class MovieController {
 
     private final MovieService movieService;
