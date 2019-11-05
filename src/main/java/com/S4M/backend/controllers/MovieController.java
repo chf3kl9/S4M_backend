@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/movies")
+@RequestMapping("movies")
 @RestController
-@CrossOrigin(origins = "http://s4m-frontend.herokuapp.com/")
+@CrossOrigin(origins = "*")
 public class MovieController {
 
     private final MovieService movieService;
