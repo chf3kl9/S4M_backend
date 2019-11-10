@@ -21,8 +21,10 @@ public class MovieController {
     }
 
     @PostMapping
-    public void insertMovie(@RequestBody Movie movie) {
-        movieService.insertMovie(movie);
+    public boolean insertMovie(@RequestBody Movie movie) {
+        if (validateMovie(movie))
+            return movieService.insertMovie(movie) != null;
+        return false;
     }
 
     @GetMapping
@@ -42,7 +44,15 @@ public class MovieController {
     }
 
     @PutMapping
-    public void updateMovie(@RequestBody Movie movie) {
-        movieService.updateMovie(movie);
+    public boolean updateMovieById(@RequestBody Movie movie) {
+        if (validateMovie(movie))
+            return movieService.updateMovie(movie) != null;
+        return false;
+    }
+
+    private boolean validateMovie(Movie movie) {
+        return movie.getDescription() != null
+                && movie.getLink() != null
+                && movie.getTitle() != null;
     }
 }
