@@ -1,38 +1,25 @@
 package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+@Getter
+@NoArgsConstructor
 public class Rating {
-    UUID id;
-    String name;
-    String description;
-    String link;
 
-    public Rating(@JsonProperty("id") UUID id,
-                  @JsonProperty("name") String name,
-                  @JsonProperty("description") String description,
-                  @JsonProperty("link") String link) {
+    @Id @GeneratedValue
+    int id;
+    int value;
+
+    public Rating(@JsonProperty("id") int id,
+                 @JsonProperty("value") int value) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.link = link;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getLink() {
-        return link;
+        this.value = value;
     }
 }
