@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +17,13 @@ public class Movie {
     String title;
     String description;
     String link;
+
+    @ManyToMany
+    List<Genre> genres;
+    @OneToMany
+    List<Comment> comments;
+    @OneToMany
+    List<Rating> ratings;
 
     public Movie(@JsonProperty("id") int id,
                  @JsonProperty("title") String title,
