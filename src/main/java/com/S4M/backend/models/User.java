@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,6 +17,15 @@ public class User {
     String name;
     String password;
     boolean isAdmin;
+
+    @OneToMany
+    List<Comment> comments;
+    @OneToMany
+    List<Rating> ratings;
+    @ManyToMany
+    List<Movie> watchedMovies;
+    @ManyToMany
+    List<Movie> favorites;
 
     public User(@JsonProperty("id") int id,
                 @JsonProperty("name") String name,

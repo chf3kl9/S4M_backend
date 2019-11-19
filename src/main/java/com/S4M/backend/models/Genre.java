@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +18,9 @@ public class Genre {
     @Id @GeneratedValue
     int id;
     String name;
+
+    @ManyToMany
+    List<Movie> movies;
 
     public Genre(@JsonProperty("id") int id,
                  @JsonProperty("name") String name) {

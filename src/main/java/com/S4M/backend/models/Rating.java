@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -16,6 +17,11 @@ public class Rating {
     @Id @GeneratedValue
     int id;
     int value;
+
+    @ManyToOne
+    User user;
+    @ManyToOne
+    Movie ratedMovie;
 
     public Rating(@JsonProperty("id") int id,
                  @JsonProperty("value") int value) {
