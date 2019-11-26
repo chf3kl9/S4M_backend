@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,6 +14,8 @@ public class Genre {
 
     @Id @GeneratedValue
     int id;
+
+    @Column(unique = true)
     String name;
 
     @ManyToMany

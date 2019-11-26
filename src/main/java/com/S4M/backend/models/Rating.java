@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(uniqueConstraints ={
+        @UniqueConstraint(columnNames = {"user_id", "movie_id"})
+})
 public class Rating {
 
     @Id @GeneratedValue
@@ -19,8 +19,10 @@ public class Rating {
     int value;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     User user;
     @ManyToOne
+    @JoinColumn(name = "movie_id")
     Movie ratedMovie;
 
     public Rating(@JsonProperty("id") int id,

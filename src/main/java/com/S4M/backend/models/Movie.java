@@ -1,6 +1,7 @@
 package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Movie {
 
     @Id @GeneratedValue
@@ -25,11 +27,11 @@ public class Movie {
     @OneToMany
     List<Rating> ratings;
 
-    public Movie(@JsonProperty("id") int id,
+    public Movie(//@JsonProperty("id") int id,
                  @JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("link") String link) {
-        this.id = id;
+        //this.id = id;
         this.title = title;
         this.description = description;
         this.link = link;
