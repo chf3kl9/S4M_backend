@@ -1,9 +1,7 @@
 package com.S4M.backend.controllers;
 
 import com.S4M.backend.models.Genre;
-import com.S4M.backend.models.Movie;
 import com.S4M.backend.services.GenreService;
-import com.S4M.backend.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

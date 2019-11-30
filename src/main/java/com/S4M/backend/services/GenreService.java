@@ -31,6 +31,12 @@ public class GenreService {
     }
 
     public Genre updateGenre(Genre genre) {
-        return repository.save(genre);
+        Genre existing = repository.findById(genre.getId()).get();
+        copyNonNullProperties(genre, existing);
+        return repository.save(existing);
+    }
+
+    void copyNonNullProperties(Genre updated, Genre original){
+        original.setMovies(Optional.ofNullable(updated.getMovies()).orElse(original.getMovies()));
     }
 }

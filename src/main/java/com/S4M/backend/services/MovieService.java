@@ -31,6 +31,14 @@ public class MovieService {
     }
 
     public Movie updateMovie(Movie movie) {
-        return repository.save(movie);
+        Movie existing = repository.findById(movie.getId()).get();
+        copyNonNullProperties(movie, existing);
+        return repository.save(existing);
+    }
+
+    void copyNonNullProperties(Movie updated, Movie original){
+        original.setGenres(Optional.ofNullable(updated.getGenres()).orElse(original.getGenres()));
+        original.setComments(Optional.ofNullable(updated.getComments()).orElse(original.getComments()));
+        original.setRatings(Optional.ofNullable(updated.getRatings()).orElse(original.getRatings()));
     }
 }
