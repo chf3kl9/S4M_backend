@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("genres")
 @RestController
-@CrossOrigin(origins = {"https://s4m-frontend.herokuapp.com", "http://s4m-frontend.herokuapp.com", "s4m-frontend.herokuapp.com"})
+@CrossOrigin(origins = {"https://s4m-frontend.herokuapp.com", "http://s4m-frontend.herokuapp.com", "s4m-frontend.herokuapp.com", "http://localhost:3000"})
 public class GenreController {
 
     private final GenreService genreService;
