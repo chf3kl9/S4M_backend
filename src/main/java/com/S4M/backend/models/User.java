@@ -1,22 +1,26 @@
 package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id @GeneratedValue
     int id;
     @Column(unique = true)
-    String name;
-    String password;
+    String email;
     boolean isAdmin;
 
     @OneToMany
@@ -28,11 +32,9 @@ public class User {
     @ManyToMany
     List<Movie> favorites;
 
-    public User(@JsonProperty("id") int id,
-                @JsonProperty("name") String name,
-                @JsonProperty("password") String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
+    public User(@JsonProperty("email") String email,
+                @JsonProperty("admin") boolean isAdmin) {
+        this.email = email;
+        this.isAdmin = isAdmin;
     }
 }
