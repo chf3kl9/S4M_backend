@@ -1,6 +1,6 @@
 package com.S4M.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,18 +22,18 @@ public class Movie {
     String description;
     String link;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL
+    )
     List<Genre> genres;
     @OneToMany
     List<Comment> comments;
     @OneToMany
     List<Rating> ratings;
 
-    public Movie(//@JsonProperty("id") int id,
-                 @JsonProperty("title") String title,
+    public Movie(@JsonProperty("title") String title,
                  @JsonProperty("description") String description,
                  @JsonProperty("link") String link) {
-        //this.id = id;
         this.title = title;
         this.description = description;
         this.link = link;

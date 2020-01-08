@@ -1,6 +1,7 @@
 package com.S4M.backend.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(uniqueConstraints ={
         @UniqueConstraint(columnNames = {"user_id", "movie_id"})
 })
