@@ -53,6 +53,7 @@ public class MovieController {
     private boolean validateMovie(Movie movie) {
         return movie.getDescription() != null
                 && movie.getLink() != null
-                && movie.getTitle() != null;
+                && movie.getTitle() != null
+                && movie.getImageURL() != null;
     }
 }

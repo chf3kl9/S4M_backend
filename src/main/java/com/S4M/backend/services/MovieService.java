@@ -40,5 +40,6 @@ public class MovieService {
         updated.setGenres(Optional.ofNullable(updated.getGenres()).orElse(original.getGenres()));
         updated.setComments(Optional.ofNullable(updated.getComments()).orElse(original.getComments()));
         updated.setRatings(Optional.ofNullable(updated.getRatings()).orElse(original.getRatings()));
+        updated.setImageURL(Optional.ofNullable(updated.getImageURL()).orElse(original.getImageURL()));
     }
 }

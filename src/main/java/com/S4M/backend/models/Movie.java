@@ -21,6 +21,7 @@ public class Movie {
     String title;
     String description;
     String link;
+    String imageURL;
 
     @ManyToMany(fetch = FetchType.LAZY,
         cascade = CascadeType.ALL
@@ -33,10 +34,12 @@ public class Movie {
 
     public Movie(@JsonProperty("title") String title,
                  @JsonProperty("description") String description,
-                 @JsonProperty("link") String link) {
+                 @JsonProperty("link") String link,
+                 @JsonProperty("imageURL") String imageURL) {
         this.title = title;
         this.description = description;
         this.link = link;
+        this.imageURL = imageURL;
     }
 
 }
