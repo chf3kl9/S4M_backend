@@ -29,8 +29,8 @@ public class BackendApplicationTests {
 
 	@Test
 	public void createMovieValid(){
-		Movie expected = new Movie(1, "Movie 1", "Movie 1", "Movie 1", null, null, null);
-		Movie movie = new Movie("Movie 1", "Movie 1", "Movie 1");
+		Movie expected = new Movie(1, "Movie 1", "Movie 1", "Movie 1", "Url", null, null, null);
+		Movie movie = new Movie("Movie 1", "Movie 1", "Movie 1", "Url");
 		Mockito.when(movieMockRepository.save(Mockito.any(Movie.class))).thenReturn(expected);
 
 		assertEquals(expected, movieService.insertMovie(movie));
@@ -39,7 +39,7 @@ public class BackendApplicationTests {
 
 	@Test
 	public void createMovieInvalid(){
-		Movie expected = new Movie(1, "Movie 1", "Movie 1", "Movie 1", null, null, null);
+		Movie expected = new Movie(1, "Movie 1", "Movie 1", "Movie 1", "Url", null, null, null);
 		Movie movie = new Movie();
 		Mockito.when(movieMockRepository.save(Mockito.any(Movie.class))).thenReturn(expected);
 
