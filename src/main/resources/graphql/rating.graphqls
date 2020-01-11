@@ -1,0 +1,6 @@
+type Rating{
+    id: Int!,
+    value: Int!,
+    user: User,
+    ratedMovie: Movie
+}

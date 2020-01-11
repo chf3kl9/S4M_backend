@@ -1,6 +1,5 @@
 package com.S4M.backend.models;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +27,7 @@ public class Genre {
     )
     List<Movie> movies;
 
-    public Genre(@JsonProperty("id") int id,
-                 @JsonProperty("name") String name) {
-        this.id = id;
+    public Genre(String name){
         this.name = name;
     }
 }

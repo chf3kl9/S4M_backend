@@ -1,6 +1,5 @@
 package com.S4M.backend.models;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,10 +31,7 @@ public class Movie {
     @OneToMany
     List<Rating> ratings;
 
-    public Movie(@JsonProperty("title") String title,
-                 @JsonProperty("description") String description,
-                 @JsonProperty("link") String link,
-                 @JsonProperty("imageURL") String imageURL) {
+    public Movie(String title, String description, String link, String imageURL) {
         this.title = title;
         this.description = description;
         this.link = link;

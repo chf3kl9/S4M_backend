@@ -14,7 +14,8 @@ public class GenreService {
     @Autowired
     GenreRepository repository;
 
-    public Genre insertGenre(Genre genre) {
+    public Genre insertGenre(String name) {
+        Genre genre = new Genre(name);
         return repository.save(genre);
     }
 
@@ -26,17 +27,14 @@ public class GenreService {
         return repository.findById(id);
     }
 
-    public void deleteGenreById(int id) {
+    public String deleteGenreById(int id) {
         repository.deleteById(id);
+        return "Genre is deleted";
     }
 
-    public Genre updateGenre(Genre genre) {
-        Genre existing = repository.findById(genre.getId()).get();
-        copyNonNullProperties(genre, existing);
+    public Genre updateGenre(int id, String name) {
+        Genre genre = repository.findById(id).get();
+        genre.setName(name);
         return repository.save(genre);
-    }
-
-    void copyNonNullProperties(Genre updated, Genre original){
-        updated.setMovies(Optional.ofNullable(updated.getMovies()).orElse(original.getMovies()));
     }
 }

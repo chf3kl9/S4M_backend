@@ -1,0 +1,5 @@
+type Genre{
+    id: Int!,
+    name: String!,
+    movies: [Movie]
+}
