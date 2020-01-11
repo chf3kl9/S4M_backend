@@ -33,28 +33,9 @@ public class BackendApplicationTests {
 		Movie movie = new Movie("Movie 1", "Movie 1", "Movie 1", "Url");
 		Mockito.when(movieMockRepository.save(Mockito.any(Movie.class))).thenReturn(expected);
 
-		assertEquals(expected, movieService.insertMovie(movie));
+		assertEquals(expected, movieService.insertMovie("Movie 1", "Movie 1", "Movie 1", "Url"));
 		Mockito.verify(movieMockRepository, Mockito.times(1)).save(movie);
 	}
-
-	@Test
-	public void createMovieInvalid(){
-		Movie expected = new Movie(1, "Movie 1", "Movie 1", "Movie 1", "Url", null, null, null);
-		Movie movie = new Movie();
-		Mockito.when(movieMockRepository.save(Mockito.any(Movie.class))).thenReturn(expected);
-
-		Mockito.when(movieMockRepository.findById(Mockito.any(Integer.class))).thenReturn(Optional.empty());
-		Mockito.when(movieMockRepository.save(Mockito.any(Movie.class))).thenReturn(expected);
-
-		try{
-			movieService.insertMovie(movie);
-			fail();
-		}
-		catch(Exception e){
-			assertEquals("No title was given.", e.getMessage());
-		}
-	}
-
 
 	@Test
 	public void contextLoads() {

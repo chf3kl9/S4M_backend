@@ -1,6 +1,8 @@
 package com.S4M.backend.services;
 
+import com.S4M.backend.models.Movie;
 import com.S4M.backend.models.User;
+import com.S4M.backend.repositories.MovieRepository;
 import com.S4M.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,38 +14,129 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    UserRepository repository;
+    UserRepository userRepository;
 
-    public User createUser(User user) {
-        return repository.save(user);
+    @Autowired
+    MovieRepository movieRepository;
+
+    public User createUser(String email, boolean isAdmin) {
+        User user = new User(email, isAdmin);
+        return userRepository.save(user);
     }
 
     public List<User> getAllUsers() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(int id) {
-        return repository.findById(id);
+    public Optional<User> getUser(Integer id, String email){
+        if (id != null)
+        {
+            return userRepository.findById(id);
+        }
+        if (email != null)
+        {
+            return userRepository.findByEmail(email);
+        }
+        return Optional.empty();
     }
 
-    public Optional<User> getUserByEmail(String email) {
-        return repository.findByEmail(email);
+    public String deleteUserById(int id) {
+        userRepository.deleteById(id);
+        return "User successfully deleted";
     }
 
-    public void deleteUserById(int id) {
-        repository.deleteById(id);
+    public User updateUser(int id, String email, boolean isAdmin) {
+        User user = userRepository.findById(id).get();
+        user.setEmail(email);
+        user.setAdmin(isAdmin);
+        return userRepository.save(user);
     }
 
-    public User updateUser(User user) {
-        User existing = repository.findById(user.getId()).get();
-        copyNonNullProperties(user, existing);
-        return repository.save(user);
+    public String addMovieToFavorites(String email, int movieId) {
+        Optional<User> user1 = userRepository.findByEmail(email);
+        Optional<Movie> movie1 = movieRepository.findById(movieId);
+
+        if (!movie1.isPresent()) {
+            return "The movie does not exist";
+        }
+        if (!user1.isPresent()) {
+            return "The user does not exist";
+        }
+
+        Movie movie = movie1.get();
+        User user = user1.get();
+
+        if (user.getFavorites().contains(movie)) {
+            return "The movie is already added to favorites";
+        }
+        user.getFavorites().add(movie);
+        userRepository.save(user);
+        return "The movie was successfully added to favorites";
     }
 
-    void copyNonNullProperties(User updated, User original){
-        updated.setComments(Optional.ofNullable(updated.getComments()).orElse(original.getComments()));
-        updated.setFavorites(Optional.ofNullable(updated.getFavorites()).orElse(original.getFavorites()));
-        updated.setRatings(Optional.ofNullable(updated.getRatings()).orElse(original.getRatings()));
-        updated.setWatchedMovies(Optional.ofNullable(updated.getWatchedMovies()).orElse(original.getWatchedMovies()));
+    public String addMovieToWatchlist(String email, int movieId) {
+        Optional<User> user1 = userRepository.findByEmail(email);
+        Optional<Movie> movie1 = movieRepository.findById(movieId);
+
+        if (!movie1.isPresent()) {
+            return "The movie does not exist";
+        }
+        if (!user1.isPresent()) {
+            return "The user does not exist";
+        }
+
+        Movie movie = movie1.get();
+        User user = user1.get();
+
+        if (user.getWatchedMovies().contains(movie)) {
+            return "The movie is already added to watchlist";
+        }
+        user.getWatchedMovies().add(movie);
+        userRepository.save(user);
+        return "The movie was successfully added to watchlist";
+    }
+
+    public String removeMovieFromFavorites(String email, int movieId) {
+        Optional<User> user1 = userRepository.findByEmail(email);
+        Optional<Movie> movie1 = movieRepository.findById(movieId);
+
+        if (!movie1.isPresent()) {
+            return "The movie does not exist";
+        }
+        if (!user1.isPresent()) {
+            return "The user does not exist";
+        }
+
+        Movie movie = movie1.get();
+        User user = user1.get();
+
+        if (!user.getFavorites().contains(movie)) {
+            return "The movie is already removed from favorites";
+        }
+        user.getFavorites().remove(movie);
+        userRepository.save(user);
+        return "The movie was successfully removed from favorites";
+    }
+
+    public String removeMovieFromWatchlist(String email, int movieId) {
+        Optional<User> user1 = userRepository.findByEmail(email);
+        Optional<Movie> movie1 = movieRepository.findById(movieId);
+
+        if (!movie1.isPresent()) {
+            return "The movie does not exist";
+        }
+        if (!user1.isPresent()) {
+            return "The user does not exist";
+        }
+
+        Movie movie = movie1.get();
+        User user = user1.get();
+
+        if (!user.getWatchedMovies().contains(movie)) {
+            return "The movie is not part of watchlist";
+        }
+        user.getWatchedMovies().remove(movie);
+        userRepository.save(user);
+        return "The movie was successfully removed from watchlist";
     }
 }

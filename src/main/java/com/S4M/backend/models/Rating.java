@@ -1,6 +1,5 @@
 package com.S4M.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +26,7 @@ public class Rating {
     @JoinColumn(name = "movie_id")
     Movie ratedMovie;
 
-    public Rating(@JsonProperty("id") int id,
-                 @JsonProperty("value") int value) {
+    public Rating(int id, int value) {
         this.id = id;
         this.value = value;
     }

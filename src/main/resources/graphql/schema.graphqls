@@ -1,0 +1,32 @@
+type Query {
+    users: [User]
+    user(id:Int!, email:String!): User
+
+    genres: [Genre]
+    genre(id:Int!): Genre
+
+    movies: [Movie]
+    movie(id:Int!): Movie
+}
+
+type Mutation {
+    createUser(email:String!, isAdmin:Boolean): User
+    deleteUserById(id:Int!): String
+    updateUserById(id:Int!, email:String!, isAdmin:Boolean): User
+
+    addMovieToFavorites(email:String!, movieId:Int!): String
+    addMovieToWatchlist(email:String!, movieId:Int!): String
+    removeMovieFromFavorites(email:String!, movieId:Int!): String
+    removeMovieFromWatchlist(email:String!, movieId:Int!): String
+
+    createGenre(name:String!): Genre
+    deleteGenreById(id:Int!): String
+    updateGenreById(id:Int!, name:String!): Genre
+
+    createMovie(title:String!, description:String!, link:String!, imageURL:String!): Movie
+    deleteMovieById(id:Int!): String
+    updateMovieById(id:Int!, title:String!, description:String!, link:String!, imageURL:String!): Movie
+
+    addGenreToMovie(id:Int!, genreId:Int!): String
+    removeGenreFromMovie(id:Int!, genreId:Int!): String
+}

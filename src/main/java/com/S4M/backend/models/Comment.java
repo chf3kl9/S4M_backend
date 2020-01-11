@@ -1,6 +1,5 @@
 package com.S4M.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +25,7 @@ public class Comment {
     @ManyToOne
     Movie movie;
 
-    public Comment(@JsonProperty("id") int id,
-                 @JsonProperty("text") String text) {
+    public Comment(int id, String text) {
         this.id = id;
         this.text = text;
     }

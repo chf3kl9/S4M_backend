@@ -1,0 +1,8 @@
+type User {
+    id: Int!,
+    email: String!,
+    comments: [Comment],
+    ratings: [Rating],
+    watchedMovies: [Movie],
+    favorites: [Movie]
+}

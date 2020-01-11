@@ -1,0 +1,10 @@
+type Movie{
+    id: Int!,
+    title: String!,
+    description: String!,
+    link: String!,
+    imageURL: String!,
+    genres: [Genre],
+    comments: [Comment],
+    ratings: [Rating]
+}
