@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,5 +30,6 @@ public class Genre {
 
     public Genre(String name){
         this.name = name;
+        this.movies = new ArrayList<>();
     }
 }

@@ -6,6 +6,8 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Component
 @CrossOrigin(origins = {"https://s4m-frontend.herokuapp.com", "http://s4m-frontend.herokuapp.com", "s4m-frontend.herokuapp.com", "http://localhost:3000"})
 public class MovieMutation implements GraphQLMutationResolver {
@@ -16,16 +18,16 @@ public class MovieMutation implements GraphQLMutationResolver {
         this.movieService = movieService;
     }
 
-    public Movie createMovie(String title, String description, String link, String imageURL) {
-        return movieService.insertMovie(title, description, link, imageURL);
+    public Movie createMovie(String title, String description, String link, String imageURL, String genreIds) {
+        return movieService.insertMovie(title, description, link, imageURL, genreIds);
     }
 
     public String deleteMovieById(Integer id) {
         return movieService.deleteMovieById(id);
     }
 
-    public Movie updateMovieById(Integer id, String title, String description, String link, String imageURL) {
-        return movieService.updateMovie(id, title, description, link, imageURL);
+    public Movie updateMovieById(Integer id, String title, String description, String link, String imageURL, String addedGenreIds, String removedGenreIds) {
+        return movieService.updateMovie(id, title, description, link, imageURL, addedGenreIds, removedGenreIds);
     }
 
     public String addGenreToMovie(Integer movieId, Integer genreId){
