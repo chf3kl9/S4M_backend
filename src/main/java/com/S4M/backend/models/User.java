@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +22,9 @@ public class User {
     String email;
     boolean isAdmin;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Comment> comments;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Rating> ratings;
     @ManyToMany
     List<Movie> watchedMovies;
@@ -33,5 +34,9 @@ public class User {
     public User(String email, boolean isAdmin) {
         this.email = email;
         this.isAdmin = isAdmin;
+        this.comments = new ArrayList<>();
+        this.ratings = new ArrayList<>();
+        this.watchedMovies = new ArrayList<>();
+        this.favorites = new ArrayList<>();
     }
 }

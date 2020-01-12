@@ -7,6 +7,7 @@ import com.S4M.backend.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +19,15 @@ public class MovieService {
     @Autowired
     GenreRepository genreRepository;
 
-    public Movie insertMovie(String title, String description, String link, String imageURL) {
+    public Movie insertMovie(String title, String description, String link, String imageURL, String genreIds) {
         Movie movie = new Movie(title, description, link, imageURL);
-        return movieRepository.save(movie);
+        Movie m = movieRepository.save(movie);
+        if (genreIds.length() > 0) {
+            for (String genreId : genreIds.split(",")) {
+                addGenreToMovie(m.getId(), Integer.parseInt(genreId));
+            }
+        }
+        return movieRepository.findById(m.getId()).get();
     }
 
     public List<Movie> getAllMovies() {
@@ -36,13 +43,24 @@ public class MovieService {
         return "Movie is deleted";
     }
 
-    public Movie updateMovie(int id, String title, String description, String link, String imageURL) {
+    public Movie updateMovie(int id, String title, String description, String link, String imageURL, String addedGenreIds, String removedGenreIds) {
         Movie movie = movieRepository.findById(id).get();
         movie.setTitle(title);
         movie.setDescription(description);
         movie.setLink(link);
         movie.setImageURL(imageURL);
-        return movieRepository.save(movie);
+        Movie m = movieRepository.save(movie);
+        if (addedGenreIds.length() > 0) {
+            for (String genreId : addedGenreIds.split(",")) {
+                addGenreToMovie(m.getId(), Integer.parseInt(genreId));
+            }
+        }
+        if (removedGenreIds.length() > 0) {
+            for (String genreId : removedGenreIds.split(",")) {
+                removeGenreFromMovie(m.getId(), Integer.parseInt(genreId));
+            }
+        }
+        return movieRepository.findById(m.getId()).get();
     }
 
     public String addGenreToMovie(int movieId, int genreId){
@@ -59,9 +77,11 @@ public class MovieService {
         Movie movie = movie1.get();
         Genre genre = genre1.get();
 
-        if (movie.getGenres().contains(genre)){
-            return "The genre is already added to the movie";
+        for(Genre g:movie.getGenres()){
+            if (g.getId() == genre.getId())
+                return "The genre is already added to the movie";
         }
+
         movie.getGenres().add(genre);
         movieRepository.save(movie);
         return "The genre was successfully added to the movie";
@@ -81,11 +101,22 @@ public class MovieService {
         Movie movie = movie1.get();
         Genre genre = genre1.get();
 
-        if (!movie.getGenres().contains(genre)){
+        int removeIndex = 0;
+
+        boolean found = false;
+        for(Genre g: movie.getGenres()){
+            if (g.getId() == genre.getId()){
+                found = true;
+                removeIndex = movie.getGenres().indexOf(g);
+                System.out.println(removeIndex);
+            }
+        }
+
+        if (!found){
             return "The genre is not part of this movie";
         }
-        movie.getGenres().remove(genre);
+        movie.getGenres().remove(removeIndex);
         movieRepository.save(movie);
-        return "The genre was successfully removed to the movie";
+        return "The genre was successfully removed from the movie";
     }
 }

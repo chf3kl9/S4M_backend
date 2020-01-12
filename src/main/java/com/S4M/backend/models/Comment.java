@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -25,8 +22,11 @@ public class Comment {
     @ManyToOne
     Movie movie;
 
-    public Comment(int id, String text) {
-        this.id = id;
+    public Comment(String text, User user, Movie movie) {
         this.text = text;
+        this.user = user;
+        this.movie = movie;
+        movie.getComments().add(this);
+        user.getComments().add(this);
     }
 }

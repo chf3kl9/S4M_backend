@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,9 +27,9 @@ public class Movie {
         cascade = CascadeType.ALL
     )
     List<Genre> genres;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Comment> comments;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Rating> ratings;
 
     public Movie(String title, String description, String link, String imageURL) {
@@ -36,6 +37,9 @@ public class Movie {
         this.description = description;
         this.link = link;
         this.imageURL = imageURL;
+        this.genres = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.ratings = new ArrayList<>();
     }
 
 }
