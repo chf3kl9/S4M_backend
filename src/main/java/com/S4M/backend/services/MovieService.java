@@ -22,7 +22,7 @@ public class MovieService {
     public Movie insertMovie(String title, String description, String link, String imageURL, String genreIds) {
         Movie movie = new Movie(title, description, link, imageURL);
         Movie m = movieRepository.save(movie);
-        if (genreIds.length() > 0) {
+        if (genreIds != null && genreIds.length() > 0) {
             for (String genreId : genreIds.split(",")) {
                 addGenreToMovie(m.getId(), Integer.parseInt(genreId));
             }
@@ -50,12 +50,12 @@ public class MovieService {
         movie.setLink(link);
         movie.setImageURL(imageURL);
         Movie m = movieRepository.save(movie);
-        if (addedGenreIds.length() > 0) {
+        if (addedGenreIds != null && addedGenreIds.length() > 0) {
             for (String genreId : addedGenreIds.split(",")) {
                 addGenreToMovie(m.getId(), Integer.parseInt(genreId));
             }
         }
-        if (removedGenreIds.length() > 0) {
+        if (removedGenreIds != null && removedGenreIds.length() > 0) {
             for (String genreId : removedGenreIds.split(",")) {
                 removeGenreFromMovie(m.getId(), Integer.parseInt(genreId));
             }
