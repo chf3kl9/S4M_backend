@@ -4,5 +4,6 @@ type User {
     comments: [Comment],
     ratings: [Rating],
     watchedMovies: [Movie],
-    favorites: [Movie]
+    favorites: [Movie],
+    isAdmin: Boolean
 }

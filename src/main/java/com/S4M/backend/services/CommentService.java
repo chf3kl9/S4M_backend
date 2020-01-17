@@ -24,9 +24,41 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    public String deleteCommentById(int id) {
-        commentRepository.deleteById(id);
-        return "Comment successfully deleted";
+    @Autowired
+    AdminValidationService adminValidationService;
+
+    public String deleteCommentById(int id, String email) {
+        Optional<Comment> c1 = commentRepository.findById(id);
+        if (!c1.isPresent()){
+            return "The comment does not exist";
+        }
+        Comment c = c1.get();
+        if (adminValidationService.isAdmin(email) || c.getUser().getEmail().equals(email)){
+
+            int removeIndex = 0;
+            User u = c.getUser();
+            for(Comment c2: u.getComments()){
+                if (c2.getId() == c.getId()){
+                    removeIndex = u.getComments().indexOf(c2);
+                }
+            }
+            u.getComments().remove(removeIndex);
+            userRepository.save(u);
+
+            Movie m = c.getMovie();
+            for(Comment c2: m.getComments()){
+                if (c2.getId() == c.getId()){
+                    removeIndex = m.getComments().indexOf(c2);
+                }
+            }
+            m.getComments().remove(removeIndex);
+            movieRepository.save(m);
+
+            commentRepository.deleteById(id);
+            return "Comment successfully deleted";
+        } else {
+            return "You are not authorized to delete this comment";
+        }
     }
 
     public String placeComment(String email, int movieId, String text){

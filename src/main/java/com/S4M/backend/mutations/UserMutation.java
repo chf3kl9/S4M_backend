@@ -20,8 +20,8 @@ public class UserMutation implements GraphQLMutationResolver {
         return userService.createUser(email, isAdmin != null && isAdmin);
     }
 
-    public String deleteUserById(Integer id) {
-        return userService.deleteUserById(id);
+    public String deleteUserById(Integer id, String email) {
+        return userService.deleteUserById(id, email);
     }
 
     public User updateUserById(Integer id, String email, Boolean isAdmin) {
