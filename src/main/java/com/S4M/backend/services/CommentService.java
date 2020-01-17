@@ -24,9 +24,18 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    public String deleteCommentById(int id) {
-        commentRepository.deleteById(id);
-        return "Comment successfully deleted";
+    public String deleteCommentById(int id, String email) {
+        Optional<Comment> c1 = commentRepository.findById(id);
+        if (!c1.isPresent()){
+            return "The comment does not exist";
+        }
+        Comment c = c1.get();
+        if (AdminValidationService.isAdmin(email) || c.getUser().getEmail().equals(email)){
+            commentRepository.deleteById(id);
+            return "Comment successfully deleted";
+        } else {
+            return "You are not authorized to delete this comment";
+        }
     }
 
     public String placeComment(String email, int movieId, String text){

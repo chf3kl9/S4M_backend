@@ -18,23 +18,23 @@ public class MovieMutation implements GraphQLMutationResolver {
         this.movieService = movieService;
     }
 
-    public Movie createMovie(String title, String description, String link, String imageURL, String genreIds) {
-        return movieService.insertMovie(title, description, link, imageURL, genreIds);
+    public Movie createMovie(String title, String description, String link, String imageURL, String genreIds, String email) {
+        return movieService.insertMovie(title, description, link, imageURL, genreIds, email);
     }
 
-    public String deleteMovieById(Integer id) {
-        return movieService.deleteMovieById(id);
+    public String deleteMovieById(Integer id, String email) {
+        return movieService.deleteMovieById(id, email);
     }
 
-    public Movie updateMovieById(Integer id, String title, String description, String link, String imageURL, String addedGenreIds, String removedGenreIds) {
-        return movieService.updateMovie(id, title, description, link, imageURL, addedGenreIds, removedGenreIds);
+    public Movie updateMovieById(Integer id, String title, String description, String link, String imageURL, String addedGenreIds, String removedGenreIds, String email) {
+        return movieService.updateMovie(id, title, description, link, imageURL, addedGenreIds, removedGenreIds, email);
     }
 
-    public String addGenreToMovie(Integer movieId, Integer genreId){
-        return movieService.addGenreToMovie(movieId, genreId);
+    public String addGenreToMovie(Integer movieId, Integer genreId, String email){
+        return movieService.addGenreToMovie(movieId, genreId, email);
     }
 
-    public String removeGenreFromMovie(Integer movieId, Integer genreId){
-        return movieService.removeGenreFromMovie(movieId, genreId);
+    public String removeGenreFromMovie(Integer movieId, Integer genreId, String email){
+        return movieService.removeGenreFromMovie(movieId, genreId, email);
     }
 }

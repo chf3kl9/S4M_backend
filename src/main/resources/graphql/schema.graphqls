@@ -20,16 +20,16 @@ type Mutation {
     removeMovieFromWatchlist(email:String!, movieId:Int!): String
 
     placeComment(email:String!, movieId:Int!, text:String!): String
-    deleteCommentById(id:Int): String
+    deleteCommentById(id:Int, email:String): String
 
-    createGenre(name:String!): Genre
-    deleteGenreById(id:Int!): String
-    updateGenreById(id:Int!, name:String!): Genre
+    createGenre(name:String!, email:String): Genre
+    deleteGenreById(id:Int!, email:String): String
+    updateGenreById(id:Int!, name:String!, email:String): Genre
 
-    createMovie(title:String!, description:String!, link:String!, imageURL:String!, genreIds:String): Movie
-    deleteMovieById(id:Int!): String
-    updateMovieById(id:Int!, title:String!, description:String!, link:String!, imageURL:String!, addedGenreIds:String, removedGenreIds:String): Movie
+    createMovie(title:String!, description:String!, link:String!, imageURL:String!, genreIds:String, email:String): Movie
+    deleteMovieById(id:Int!, email:String): String
+    updateMovieById(id:Int!, title:String!, description:String!, link:String!, imageURL:String!, addedGenreIds:String, removedGenreIds:String, email:String): Movie
 
-    addGenreToMovie(movieId:Int!, genreId:Int!): String
-    removeGenreFromMovie(movieId:Int!, genreId:Int!): String
+    addGenreToMovie(movieId:Int!, genreId:Int!, email:String): String
+    removeGenreFromMovie(movieId:Int!, genreId:Int!, email:String): String
 }

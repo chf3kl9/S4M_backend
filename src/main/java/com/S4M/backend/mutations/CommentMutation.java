@@ -19,7 +19,7 @@ public class CommentMutation implements GraphQLMutationResolver {
         return commentService.placeComment(email, movieId, text);
     }
 
-    public String deleteCommentById(Integer id){
-        return commentService.deleteCommentById(id);
+    public String deleteCommentById(Integer id, String email){
+        return commentService.deleteCommentById(id, email);
     }
 }
