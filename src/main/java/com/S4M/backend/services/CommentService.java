@@ -24,13 +24,36 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    AdminValidationService adminValidationService;
+
     public String deleteCommentById(int id, String email) {
         Optional<Comment> c1 = commentRepository.findById(id);
         if (!c1.isPresent()){
             return "The comment does not exist";
         }
         Comment c = c1.get();
-        if (AdminValidationService.isAdmin(email) || c.getUser().getEmail().equals(email)){
+        if (adminValidationService.isAdmin(email) || c.getUser().getEmail().equals(email)){
+
+            int removeIndex = 0;
+            User u = c.getUser();
+            for(Comment c2: u.getComments()){
+                if (c2.getId() == c.getId()){
+                    removeIndex = u.getComments().indexOf(c2);
+                }
+            }
+            u.getComments().remove(removeIndex);
+            userRepository.save(u);
+
+            Movie m = c.getMovie();
+            for(Comment c2: m.getComments()){
+                if (c2.getId() == c.getId()){
+                    removeIndex = m.getComments().indexOf(c2);
+                }
+            }
+            m.getComments().remove(removeIndex);
+            movieRepository.save(m);
+
             commentRepository.deleteById(id);
             return "Comment successfully deleted";
         } else {

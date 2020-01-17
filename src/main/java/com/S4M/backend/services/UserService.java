@@ -19,6 +19,9 @@ public class UserService {
     @Autowired
     MovieRepository movieRepository;
 
+    @Autowired
+    AdminValidationService adminValidationService;
+
     public User createUser(String email, boolean isAdmin) {
         User user = new User(email, isAdmin);
         return userRepository.save(user);
@@ -40,7 +43,8 @@ public class UserService {
         return Optional.empty();
     }
 
-    public String deleteUserById(int id) {
+    public String deleteUserById(int id, String email) {
+        adminValidationService.isAuthorized(email);
         userRepository.deleteById(id);
         return "User successfully deleted";
     }

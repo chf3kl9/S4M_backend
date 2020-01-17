@@ -11,7 +11,7 @@ type Query {
 
 type Mutation {
     createUser(email:String!, isAdmin:Boolean): User
-    deleteUserById(id:Int!): String
+    deleteUserById(id:Int!, email:String!): String
     updateUserById(id:Int!, email:String!, isAdmin:Boolean): User
 
     addMovieToFavorites(email:String!, movieId:Int!): String

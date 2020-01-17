@@ -30,11 +30,11 @@ public class MovieMutation implements GraphQLMutationResolver {
         return movieService.updateMovie(id, title, description, link, imageURL, addedGenreIds, removedGenreIds, email);
     }
 
-    public String addGenreToMovie(Integer movieId, Integer genreId, String email){
+    public String addGenreToMovie(Integer movieId, Integer genreId, String email) {
         return movieService.addGenreToMovie(movieId, genreId, email);
     }
 
-    public String removeGenreFromMovie(Integer movieId, Integer genreId, String email){
+    public String removeGenreFromMovie(Integer movieId, Integer genreId, String email) {
         return movieService.removeGenreFromMovie(movieId, genreId, email);
     }
 }

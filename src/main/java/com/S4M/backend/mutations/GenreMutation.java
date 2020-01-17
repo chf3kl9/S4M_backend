@@ -17,15 +17,15 @@ public class GenreMutation implements GraphQLMutationResolver {
     }
 
 
-    public Genre createGenre(String name) {
-        return genreService.insertGenre(name);
+    public Genre createGenre(String name, String email) {
+        return genreService.insertGenre(name, email);
     }
 
-    public String deleteGenreById(Integer id) {
-        return genreService.deleteGenreById(id);
+    public String deleteGenreById(Integer id, String email) {
+        return genreService.deleteGenreById(id, email);
     }
 
-    public Genre updateGenreById(Integer id, String name) {
-        return genreService.updateGenre(id, name);
+    public Genre updateGenreById(Integer id, String name, String email) {
+        return genreService.updateGenre(id, name, email);
     }
 }
