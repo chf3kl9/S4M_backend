@@ -21,6 +21,7 @@ type Mutation {
 
     placeComment(email:String!, movieId:Int!, text:String!): String
     deleteCommentById(id:Int): String
+    rateMovie(email:String!, movieId:Int!, rating:Int!): String
 
     createGenre(name:String!): Genre
     deleteGenreById(id:Int!): String

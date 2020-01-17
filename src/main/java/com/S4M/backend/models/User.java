@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @Column(unique = true)
     String email;

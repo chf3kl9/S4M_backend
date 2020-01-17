@@ -3,11 +3,13 @@ package com.S4M.backend.models;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(uniqueConstraints ={
@@ -15,7 +17,7 @@ import javax.persistence.*;
 })
 public class Rating {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     int value;
 
@@ -26,8 +28,9 @@ public class Rating {
     @JoinColumn(name = "movie_id")
     Movie ratedMovie;
 
-    public Rating(int id, int value) {
-        this.id = id;
+    public Rating(int value, User user, Movie ratedMovie) {
         this.value = value;
+        this.user = user;
+        this.ratedMovie = ratedMovie;
     }
 }

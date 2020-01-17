@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Comment {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String text;
 
